@@ -28,4 +28,10 @@ export class UsersService {
     const user = { email, password };
     return user;
   }
+
+  // Get all user service
+  async getUsers() {
+    const users = [];
+    return users;
+  }
 }
