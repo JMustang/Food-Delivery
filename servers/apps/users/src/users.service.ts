@@ -31,7 +31,14 @@ export class UsersService {
 
   // Get all user service
   async getUsers() {
-    const users = [];
+    const users = [
+      {
+        id: 1,
+        name: 'John Doe',
+        email: 'john@example.com',
+        password: '1235467f',
+      },
+    ];
     return users;
   }
 }

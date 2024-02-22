@@ -1,9 +1,10 @@
 import { RegisterDto } from './dto/user.dto';
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UsersService } from './users.service';
 import { RegisterResponse } from './types/user.types';
 // import { Response } from 'express';
 import { BadRequestException } from '@nestjs/common';
+import { User } from './entities/user.entity';
 
 @Resolver('User')
 // UserFilters
@@ -20,5 +21,10 @@ export class UsersResolver {
 
     const user = await this.userService.register(registerDto);
     return { user };
+  }
+
+  @Query(() => [User])
+  async getUsers() {
+    return this.userService.getUsers();
   }
 }
