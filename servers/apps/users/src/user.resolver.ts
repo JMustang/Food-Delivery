@@ -1,8 +1,8 @@
 import { RegisterDto } from './dto/user.dto';
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { UsersService } from './users.service';
+import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { UsersService } from './UsersService';
 import { RegisterResponse } from './types/user.types';
-// import { Response } from 'express';
+import { Response } from 'express';
 import { BadRequestException } from '@nestjs/common';
 import { User } from './entities/user.entity';
 
@@ -14,12 +14,13 @@ export class UsersResolver {
   @Mutation(() => RegisterResponse)
   async register(
     @Args('registerInput') registerDto: RegisterDto,
+    @Context() context: { res: Response },
   ): Promise<RegisterResponse> {
     if (!registerDto.name || !registerDto.email || !registerDto.password) {
       throw new BadRequestException('Please provide all required fields.');
     }
 
-    const user = await this.userService.register(registerDto);
+    const user = await this.userService.register(registerDto, context.res);
     return { user };
   }
 
