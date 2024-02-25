@@ -17,9 +17,7 @@ export class UsersService {
   async register(registerDto: RegisterDto, response: Response) {
     const { name, email, password } = registerDto;
     const isEmailExist = await this.prisma.user.findUnique({
-      where: {
-        email,
-      },
+      where: { email },
     });
     if (isEmailExist) {
       throw new BadRequestException('User already exist with this email!');
