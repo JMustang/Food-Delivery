@@ -4,6 +4,14 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { LoginDto, RegisterDto } from './dto/user.dto';
 import { PrismaService } from '../../../prisma/prisma.service';
 import { Response } from 'express';
+import * as bcrypt from 'bcrypt';
+
+interface UserData {
+  name: string;
+  email: string;
+  password: string;
+  phone_number: number;
+}
 
 @Injectable()
 export class UsersService {
@@ -37,15 +45,34 @@ export class UsersService {
       );
     }
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const user = await this.prisma.user.create({
       data: {
         name,
         email,
-        password,
+        password: hashedPassword,
         phone_number,
       },
     });
     return { user, response };
+  }
+
+  // Create activation token
+  async createActivationToken(user: UserData) {
+    const activationCode = Math.floor(1000 + Math.random() * 9000).toString();
+
+    const token = this.JwtService.sign(
+      {
+        user,
+        activationCode,
+      },
+      {
+        secret: this.ConfigService.get<string>('ACTIVATION_SECRET'),
+        expiresIn: '5m',
+      },
+    );
+    return { token, activationCode };
   }
 
   // Login service
