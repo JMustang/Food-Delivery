@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { UsersService } from './UsersService';
+import { UsersService } from './users.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import {
   ApolloFederationDriver,
@@ -10,6 +10,7 @@ import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../../../prisma/prisma.service';
 import { UsersResolver } from './user.resolver';
 import { EmailModule } from './email/email.module';
+import { EmailService } from './email/email.service';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { EmailModule } from './email/email.module';
     JwtService,
     PrismaService,
     UsersResolver,
+    EmailService,
   ],
 })
 export class UsersModule {}

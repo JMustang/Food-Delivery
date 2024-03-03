@@ -15,23 +15,24 @@ import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter';
           secure: true,
           auth: {
             user: config.get('SMTP_MAIL'),
-
             pass: config.get('SMTP_PASSWORD'),
           },
         },
-
         defaults: {
           from: 'Becodemy',
         },
         template: {
           dir: join(__dirname, '../../../../servers/email-templates'),
           adapter: new EjsAdapter(),
-          options: { strict: true },
+          options: {
+            strict: false,
+          },
         },
       }),
       inject: [ConfigService],
     }),
   ],
   providers: [EmailService],
+  exports: [EmailService],
 })
 export class EmailModule {}
