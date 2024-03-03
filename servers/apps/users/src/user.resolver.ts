@@ -1,6 +1,6 @@
 import { RegisterDto } from './dto/user.dto';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { UsersService } from './UsersService';
+import { UsersService } from './users.service';
 import { RegisterResponse } from './types/user.types';
 import { Response } from 'express';
 import { BadRequestException } from '@nestjs/common';

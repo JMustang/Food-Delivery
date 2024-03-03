@@ -20,13 +20,19 @@
     "test:e2e": "jest --config ./apps/gateway/test/jest-e2e.json"
   },
   "dependencies": {
+    "@mapbox/node-pre-gyp": "^1.0.11",
     "@nestjs-modules/mailer": "^1.11.2",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "@types/ejs": "^3.1.5",
+    "aws-sdk": "^2.1569.0",
+    "bcrypt": "^5.0.1",
     "class-transformer": "^0.5.1",
     "ejs": "^3.1.9",
+    "mock-aws-s3": "^4.0.2",
+    "nock": "^13.5.4",
+    "node-pre-gyp": "^0.17.0",
     "nodemailer": "^6.9.10",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
@@ -44,6 +50,7 @@
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "html-loader": "^5.0.0",
     "jest": "29.3.1",
     "prettier": "^2.3.2",
     "source-map-support": "^0.5.20",
