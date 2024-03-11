@@ -88,6 +88,9 @@ export class UsersService {
     return { token, activationCode };
   }
 
+  // Activations user
+  async activateUser(activationDto: ActivationDto) {}
+
   // Login service
   async login(loginDto: LoginDto) {
     const { email, password } = loginDto;
